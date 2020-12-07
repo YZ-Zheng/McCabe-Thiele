@@ -1,3 +1,7 @@
+"""
+A Tool to calculate the number of ideal stages using McCabe Thiele graphical method.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from shapely.geometry import LineString
@@ -5,12 +9,24 @@ from scipy.interpolate import make_interp_spline
 
 
 def diagonal():
+    """
+    plot the diagonal line y=x
+
+    """
     plt.plot([0, 1], [0, 1], color='black')
     return [0, 1], [0, 1]
 
 
-def equilibrium_line(x=0.0, y=0.0, alpha=0.0):
+def equilibrium_line(x=None, y=None, alpha=0.0):
+    """
+    Plot the equilibrium line using either x and y values or relative volatility alpha
+
+    """
     # simple input checks
+    if x is None:
+        x = []
+    if y is None:
+        y = []
     if x == 0 and alpha == 0:
         print("Invalid input")
         return
@@ -38,11 +54,22 @@ def equilibrium_line(x=0.0, y=0.0, alpha=0.0):
 
 
 def top_operating_line(xd, rd):
+    """
+    return the intercept of the TOL
+
+    """
     intercept = xd / (rd + 1)
     return intercept
 
 
-def number_of_stages(xd, xb, z=0.0, q=0.0, rd=0.0, x=0.0, y=0.0, alpha=0.0, total_reflux=False):
+def number_of_stages(xd, xb, z=0.0, q=0.0, rd=0.0, x=None, y=None, alpha=0.0, total_reflux=False):
+    """
+    return the number of ideal stages required to achieve the given separation
+    """
+    if y is None:
+        y = []
+    if x is None:
+        x = []
     plt.plot([xd, xd], [0, xd], color='black')
     plt.plot([xb, xb], [0, xb], color='black')
     plt.margins(x=0, y=0)
@@ -243,6 +270,7 @@ def number_of_stages(xd, xb, z=0.0, q=0.0, rd=0.0, x=0.0, y=0.0, alpha=0.0, tota
         return stages
 
 
+# Input the variables
 if __name__ == '__main__':
 
     distillate_mole_fraction = 0.6816
