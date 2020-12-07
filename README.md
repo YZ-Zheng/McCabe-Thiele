@@ -4,4 +4,4 @@ This is a python program that I have developed to perform the McCabe Thiele grap
 
 # Instruction
 
-Simply input the variables in McCabe_Thiele.py and run it.
+Simply input the variables in *McCabe_Thiele.py* and run it.
